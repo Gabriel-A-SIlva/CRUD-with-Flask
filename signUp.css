@@ -1,0 +1,53 @@
+.contentSignUp form {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+.textfield {
+    display: flex;
+    flex-direction: column;
+    background: #f4f4f9;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.textfield label {
+    font-size: 12px;
+    font-weight: bold;
+    color: #6c63ff;
+    margin-bottom: 5px;
+}
+.textfield input {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    background: #e6e6fa;
+    padding: 6px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+.content_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn_form {
+    width: 100%;
+    max-width: 200px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    color: rgb(57, 57, 168);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #e0e0ff;
+}
+.btn_form:hover {
+    border: 1px solid #fff;
+    background: rgb(57, 57, 168);
+    color: #fff;
+}
