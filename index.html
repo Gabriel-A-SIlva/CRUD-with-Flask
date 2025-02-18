@@ -12,7 +12,7 @@
             referrerpolicy="no-referrer"
         />
         <link rel="stylesheet" href="sidebar.css" />
-        <link rel="stylesheet" href="signUp.css.css" />
+        <link rel="stylesheet" href="forms.css" />
         <style>
             * {
                 margin: 0;
@@ -36,56 +36,31 @@
                 align-items: center;
                 margin-left: 300px; /* Largura da sidebar */
             }
-            /*
-            djajdlfasldfl
-            fldsfasfkasd
-            */
-            .contentUpdate form {
-                width: 100%;
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 15px;
-            }
-            .textfield {
-                display: flex;
-                flex-direction: column;
-                background: #f4f4f9;
-                padding: 10px;
-                border-radius: 10px;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-                text-align: center;
-            }
-            .textfield label {
-                font-size: 12px;
-                font-weight: bold;
-                color: #6c63ff;
-                margin-bottom: 5px;
-            }
         </style>
     </head>
     <body>
         <div class="sidebar">
             <div class="section_btns_open_forms">
-                <div class="btn" id="open_forms" data-target="create_div">
+                <div class="btn open_forms" data-target="create_div">
                     <i class="fa-solid fa-plus"></i>
                     <h4>Create</h4>
                 </div>
-                <div class="btn" id="open_forms" data-target="read_div">
+                <div class="btn open_forms" data-target="read_div">
                     <i class="fa-brands fa-readme"></i>
                     <h4>Read</h4>
                 </div>
-                <div class="btn" id="open_forms" data-target="update_div">
+                <div class="btn open_forms" data-target="update_div">
                     <i class="fa-solid fa-rotate-right"></i>
                     <h4>Update</h4>
                 </div>
-                <div class="btn" id="open_forms" data-target="delete_div">
+                <div class="btn open_forms" data-target="delete_div">
                     <i class="fa-solid fa-trash"></i>
                     <h4>Delete</h4>
                 </div>
             </div>
         </div>
         <div class="section_forms">
-            <div id="create_div" class="contentSignUp" style="display: none">
+            <div id="create_div" class="contentForm">
                 <form method="post" id="form_create">
                     <div class="textfield">
                         <label for="name">Name</label>
@@ -109,25 +84,47 @@
                     </div>
                 </form>
             </div>
-            <div id="update_div" class="contentUpdate">
+            <div id="update_div" class="contentForm">
                 <form method="post">
-                    <input type="text" name="id" placeholder="ID" />
-                    <input type="text" name="name" placeholder="Name" />
-                    <input type="text" name="email" placeholder="Email" />
-                    <input type="text" name="password" placeholder="Password" />
-                    <button type="submit">Update</button>
+                    <div class="textfield">
+                        <label for="id">ID</label>
+                        <input type="text" name="id" placeholder="ID" />
+                    </div>
+                    <div class="textfield">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" placeholder="Name" />
+                    </div>
+                    <div class="textfield">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" placeholder="Email" />
+                    </div>
+                    <div class="textfield">
+                        <label for="password">Password</label>
+                        <input
+                            type="text"
+                            name="password"
+                            placeholder="Password"
+                        />
+                    </div>
+                    <div class="content_btn">
+                        <button class="btn_form" type="submit">Update</button>
+                    </div>
                 </form>
                 <h1>Or</h1>
                 <form action="" id="update_patch" method="patch">
-                    <input type="text" name="id" placeholder="ID" />
-                    <div class="field_update_cong">
+                    <div class="textfield">
+                        <label for="id">ID</label>
+                        <input type="text" name="id" placeholder="ID" />
+                    </div>
+                    <div class="textfield">
                         <label for="campo">Campo a modificar:</label>
                         <select id="campo" name="campo" required>
-                            <option value="congregacao">Congregação</option>
-                            <option value="area">Área</option>
+                            <option value="name">Name</option>
+                            <option value="email">Email</option>
+                            <option value="password">Password</option>
                         </select>
                     </div>
-                    <div class="field_update_cong">
+                    <div class="textfield">
                         <label for="novo_valor">Novo Valor:</label>
                         <input
                             type="text"
@@ -136,26 +133,34 @@
                             required
                         />
                     </div>
-                    <button type="submit">Update</button>
+                    <div class="content_btn">
+                        <button type="submit" class="btn_form">Update</button>
+                    </div>
                 </form>
             </div>
         </div>
         <script>
-            const buttons = document.querySelectorAll("#open_forms");
-            let activeDiv = null;
-            buttons.forEach((buttons) => {
-                buttons.addEventListener("click", (e) => {
-                    const targetId = this.getAttribute("data-target");
+            // Seleciona todos os botões da sidebar
+            const buttons = document.querySelectorAll(".btn");
+            let activeDiv = null; // Variável para armazenar o formulário ativo
+
+            buttons.forEach((button) => {
+                button.addEventListener("click", (e) => {
+                    const targetId = button.getAttribute("data-target");
                     const targetDiv = document.querySelector(`#${targetId}`);
 
                     if (activeDiv && activeDiv !== targetDiv) {
-                        activeDiv.style.display = "none";
+                        activeDiv.style.display = "none"; // Oculta o formulário anterior
                     }
-                    if (activeDiv.style.display === "none") {
-                        targetDiv.style.display = "block";
+
+                    if (
+                        !targetDiv.style.display ||
+                        targetDiv.style.display === "none"
+                    ) {
+                        targetDiv.style.display = "block"; // Mostra o novo formulário
                         activeDiv = targetDiv;
                     } else {
-                        targetDiv.style.display = "none";
+                        targetDiv.style.display = "none"; // Esconde se já estiver visível
                         activeDiv = null;
                     }
                 });

@@ -1,4 +1,7 @@
-.contentSignUp form {
+.contentForm {
+    display: none;
+}
+.contentForm form {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -19,7 +22,8 @@
     color: #6c63ff;
     margin-bottom: 5px;
 }
-.textfield input {
+.textfield input,
+.textfield select {
     font-size: 14px;
     font-weight: bold;
     color: #333;
