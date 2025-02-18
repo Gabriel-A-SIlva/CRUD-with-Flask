@@ -11,8 +11,14 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
         />
-        <link rel="stylesheet" href="sidebar.css" />
-        <link rel="stylesheet" href="forms.css" />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/sidebar.css') }}"
+        />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/forms.css') }}"
+        />
         <style>
             * {
                 margin: 0;
@@ -71,11 +77,11 @@
                         <input type="text" name="email" placeholder="Email" />
                     </div>
                     <div class="textfield">
-                        <label for="senha">Password</label>
+                        <label for="password">Password</label>
                         <input
                             type="password"
-                            name="senha"
-                            id="senha"
+                            name="password"
+                            id="password"
                             placeholder="Password"
                         />
                     </div>
@@ -125,11 +131,11 @@
                         </select>
                     </div>
                     <div class="textfield">
-                        <label for="novo_valor">Novo Valor:</label>
+                        <label for="new_value">Novo Valor:</label>
                         <input
                             type="text"
-                            id="novo_valor"
-                            name="novo_valor"
+                            id="new_value"
+                            name="new_value"
                             required
                         />
                     </div>
@@ -171,15 +177,15 @@
             form.addEventListener("submit", (event) => {
                 event.preventDefault();
 
-                const FormData = new FormData(event.target);
-                const dados = Object.fromEntries(FormData.entries());
+                const formData = new FormData(event.target);
+                const data = Object.fromEntries(formData.entries());
 
-                const cadastro_feitos = new Create(
-                    dados.name,
-                    dados.email,
-                    dados.password
+                const newUser = new Create(
+                    data.name,
+                    data.email,
+                    data.password
                 );
-                cadastro_feitos.enviaCreate();
+                newUser.sendCreate();
             });
 
             class Create {
@@ -189,17 +195,92 @@
                     this.password = password;
                 }
 
-                enviaCreate() {
+                sendCreate() {
                     fetch("/create", {
-                        method: POST,
+                        method: "POST",
                         headers: {
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify(this),
-                    });
-                    then((response) => response.json())
-                        .then((data) => console.log("Create with Sucefy"))
+                    })
+                        .then((response) => response.json())
+                        .then((data) => console.log("Create with Success"))
                         .catch((error) => console.log("Error"));
+                }
+            }
+        </script>
+        <script>
+            const formUpdateWithGet = document.querySelector("#form_update");
+            formUpdateWithGet.addEventListener("submit", (event) => {
+                event.preventDefault();
+
+                const formDataWithGet = new FormData(event.target);
+                const dataWithGet = Object.fromEntries(formData.entries());
+
+                const updateWithGet = new Update(
+                    dataWithGet.id,
+                    dataWithGet.name,
+                    dataWithGet.email,
+                    dataWithGet.password
+                );
+                updateWithGet.sendUpdateWithGet();
+            });
+            class UpdateWithGet {
+                constructor(id, name, email, password) {
+                    this.id = id;
+                    this.name = name;
+                    this.email = email;
+                    this.password = password;
+                }
+
+                sendUpdateWithGet() {
+                    fetch("/updateWithGet", {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(this),
+                    })
+                        .then((response) => response.json())
+                        .then((data) => console.log("Update with Success"))
+                        .catch((error) => console.log("Error in Update"));
+                }
+            }
+        </script>
+        <script>
+            const formUpdateWithPatch = document.querySelector("#update_patch");
+            formUpdateWithPatch.addEventListener("submit", (event) => {
+                event.preventDefault();
+
+                const formDataWithPatch = new FormData(event.target);
+                const dataWithPatch = Object.fromEntries(formData.entries());
+
+                const updateWithPatch = new Update(
+                    dataWithPatch.id,
+                    dataWithPatch.campo,
+                    dataWithPatch.new_value
+                );
+                update.sendUpdate();
+            });
+
+            class UpdateWithPatch {
+                constructor(id, campo, new_value) {
+                    this.id = id;
+                    this.campo = campo;
+                    this.new_value = new_value;
+                }
+
+                sendUpdateWithPatch() {
+                    fetch("/updateWithPatch", {
+                        method: "PATCH",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(this),
+                    })
+                        .then((response) => response.json())
+                        .then((data) => console.log("Update with Success"))
+                        .catch((error) => console.log("Error in Update"));
                 }
             }
         </script>

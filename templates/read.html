@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/sidebar.css') }}"
+        />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                text-decoration: none;
+            }
+
+            body {
+                display: flex;
+                width: 100%;
+                height: 100vh;
+                background-color: #064e78;
+            }
+
+            /* Área de formulários ao lado da sidebar */
+            .section_forms {
+                flex: 1; /* Ocupa todo o espaço restante */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-left: 300px; /* Largura da sidebar */
+            }
+        </style>
+    </head>
+    <body>
+        <div class="sidebar">
+            <div class="section_btns_open_forms">
+                <div class="btn open_forms" data-target="create_div">
+                    <i class="fa-solid fa-plus"></i>
+                    <h4>Create</h4>
+                </div>
+                <div class="btn open_forms" data-target="read_div">
+                    <i class="fa-brands fa-readme"></i>
+                    <h4>Read</h4>
+                </div>
+                <div class="btn open_forms" data-target="update_div">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <h4>Update</h4>
+                </div>
+                <div class="btn open_forms" data-target="delete_div">
+                    <i class="fa-solid fa-trash"></i>
+                    <h4>Delete</h4>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
